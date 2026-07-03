@@ -1,14 +1,19 @@
 import streamlit as st
-import pandas as pd
-import gspread
+import json
 from oauth2client.service_account import ServiceAccountCredentials
+import gspread
 
-# 1. 구글 시트 연결 함수 (기존 코드 그대로)
 def get_sheet():
+    # 1. 스트림릿 비밀 설정에서 JSON 가져오기
+    json_data = st.secrets["GSPREAD_JSON"]
+    creds_dict = json.loads(json_data)
+    
+    # 2. 인증 설정
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     client = gspread.authorize(creds)
-    # 아까 성공했던 시트 ID를 여기에 넣으세요
+    
+    # 3. 시트 연결
     sheet = client.open_by_key("1cOPrHkEUYfS1tyQX_mOpPiikfN8CBhREJwS2SinTVpg").sheet1
     return sheet
 
