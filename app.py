@@ -61,8 +61,8 @@ elif st.session_state.step == 2:
         col1, col2 = st.columns(2)
         
         with col1:
-            ipm_code = st.text_input("IPM사업코드")
             gukjo_code = st.text_input("국조실사업코드")
+            ipm_code = st.text_input("IPM사업코드")
             dept_org = st.text_input("소관부처(기관)")
             unit_biz = st.text_input("관(단위사업)")
             sub_biz = st.text_input("항(세부사업)")
@@ -86,9 +86,9 @@ elif st.session_state.step == 2:
         if submitted:
             # 구글 시트에 저장할 데이터 리스트 (열 순서 맞추기)
             data = [
-                st.session_state.selected_dept, st.session_state.selected_project,
-                ipm_code, gukjo_code, dept_org, unit_biz, sub_biz, detail_biz,
-                kor_name, eng_name, start_year, end_year, status, total_budget,
+                
+                gukjo_code, ipm_code, dept_org, st.session_state.selected_dept,
+                unit_biz, sub_biz, detail_biz, kor_name, eng_name, start_year, end_year, status, total_budget,
                 target_country, all_countries, region, biz_type, biz_field
             ]
             
