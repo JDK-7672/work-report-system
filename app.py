@@ -4,9 +4,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 
 def get_sheet():
-    # 1. 스트림릿 비밀 설정에서 JSON 가져오기
-    json_data = st.secrets["GSPREAD_JSON"]
-    creds_dict = json.loads(json_data)
+    # 1. 쪼개진 비밀 설정 불러오기
+    creds_dict = dict(st.secrets["gspread"])
     
     # 2. 인증 설정
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
