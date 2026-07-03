@@ -5,6 +5,13 @@ import json
 from oauth2client.service_account import ServiceAccountCredentials
 
 # (기존 get_sheet 함수는 유지하되, 전체 시트를 관리하도록 확장)
+
+def get_sheet():
+    client = get_client()
+    sh = client.open_by_key("1cOPrHkEUYfS1tyQX_mOpPiikfN8CBhREJwS2SinTVpg")
+    # 저장할 탭 이름을 '시트1'로 명확히 지정합니다.
+    return sh.worksheet("시트1")
+
 def get_client():
     creds_dict = dict(st.secrets["gspread"])
     scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
